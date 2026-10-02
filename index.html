@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bibliothèques A-Frame et AR.js -->
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
   </head>
-  <body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-      
-      <!-- Marqueur prédéfini Hiro (facile pour tester) -->
-      <a-marker preset="hiro">
-        <!-- Remplacer "gal-b-lantern-4120.glb" par le nom exact de votre fichier 3D -->
-        <a-entity gltf-model="url(gal-b-lantern-4120.glb)" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
-      </a-marker>
+  <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh;">
+    
+    <!-- Remplacez liquide.glb par le nom exact de votre fichier 3D -->
+    <model-viewer 
+      src="gal-b-lantern-4120.glb" 
+      ar 
+      ar-modes="webxr scene-viewer quick-look" 
+      camera-controls 
+      auto-rotate 
+      shadow-intensity="1">
+      <button slot="ar-button" style="padding: 12px 24px; background: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px;">
+        Voir en Réalité Augmentée 📱
+      </button>
+    </model-viewer>
 
-      <a-entity camera></a-entity>
-    </a-scene>
   </body>
 </html>
