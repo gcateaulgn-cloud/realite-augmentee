@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bibliothèques A-Frame et MindAR -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
   </head>
-  <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh;">
-    
-    <!-- Remplacez liquide.glb par le nom exact de votre fichier 3D -->
-    <model-viewer 
-      src="gal-b-lantern-4120.glb" 
-      ar 
-      ar-modes="webxr scene-viewer quick-look" 
-      camera-controls 
-      auto-rotate 
-      shadow-intensity="1">
-      <button slot="ar-button" style="padding: 12px 24px; background: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px;">
-        Voir en Réalité Augmentée 📱
-      </button>
-    </model-viewer>
+  <body style="margin: 0; overflow: hidden;">
 
+    <!-- imageTargetSrc pointe vers le fichier .mind de vos étiquettes/flacons -->
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- FLACON 1 (Cible index 0 dans targets.mind) -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <!-- Modèle 3D animé de la molécule -->
+        <a-gltf-model src="liquide.glb" position="0 0.2 0" scale="0.3 0.3 0.3" rotation="0 0 0"></a-gltf-model>
+        
+        <!-- Panneau d'information texte sous le modèle 3D -->
+        <a-plane color="#000000" opacity="0.7" position="0 -0.3 0" height="0.3" width="1" rotation="0 0 0">
+          <a-text value="Etat Liquide\nMolécules désordonnées et mobiles" align="center" color="#FFFFFF" width="1.5"></a-text>
+        </a-plane>
+      </a-entity>
+
+      <!-- FLACON 2 (Cible index 1) -->
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-gltf-model src="solide.glb" position="0 0.2 0" scale="0.3 0.3 0.3"></a-gltf-model>
+        <a-plane color="#000000" opacity="0.7" position="0 -0.3 0" height="0.3" width="1">
+          <a-text value="Etat Solide\nMolécules ordonnées et fixes" align="center" color="#FFFFFF" width="1.5"></a-text>
+        </a-plane>
+      </a-entity>
+
+    </a-scene>
   </body>
 </html>
